@@ -17,7 +17,7 @@
             <h1>KADMIN</h1>
             <p>The Kafka Admin for the no-nonsense.</p>
             <div class="kafka-host text-center">
-                <span>Connected to: </span><span class="fw-bold">{{kafka_host}}:{{kafka_port}}</span> 
+                <span>Connected to: </span><span class="fw-bold">{{kafka_host}}:{{kafka_port}}</span>
                 <i class="bi bi-check-circle-fill" style="color:green"></i>
             </div>
         </div>
@@ -31,8 +31,7 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label for="producer-topicname" class="form-label">Topic Name</label>
-                                <input class="form-control" id="producer-topicname"
-                                    placeholder="Choose a topic name">
+                                <input class="form-control" id="producer-topicname" placeholder="Choose a topic name">
                             </div>
                             <div class="my-3">
                                 <label for="producer-message" class="form-label">Message</label>
@@ -56,8 +55,7 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label for="consumer-topicname" class="form-label">Topic Name</label>
-                                <input class="form-control" id="consumer-topicname"
-                                    placeholder="Choose a topic name">
+                                <input class="form-control" id="consumer-topicname" placeholder="Choose a topic name">
                             </div>
                             <div class="row my-3">
                                 <div class="col-6">
@@ -71,8 +69,8 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <button class="btn btn-primary col-12 text-center" id="consumer-stream-button" disabled
-                                        type="button">
+                                    <button class="btn btn-primary col-12 text-center" id="consumer-stream-button"
+                                        disabled type="button">
                                         <div id="streaming-active" class="d-none">
                                             <span>Streaming</span>
                                             <span class="spinner-grow spinner-grow-sm text-danger" id="spinner-element"
@@ -99,7 +97,7 @@
         </div>
         <div class="footer text-center">
             <i class="bi bi-github"></i>
-            <a href="https://github.com/yukalangbuana/kadmin">https://github.com/yukalangbuana/kadmin</a>
+            <a href="https://github.com/yukalangbuana/kadmin" target="_blank">https://github.com/yukalangbuana/kadmin</a>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -132,7 +130,7 @@
             $('#consumer-sample-button').click(function () {
                 $('#consumer-sample-button > #spinner-element').removeClass('d-none');
                 $.ajax({
-                    url: "api/"+$('#consumer-topicname').val()+"/sample",
+                    url: "api/" + $('#consumer-topicname').val() + "/sample",
                     type: 'GET',
                     success: function (data) {
                         $('#consumer-sample-button > #spinner-element').addClass('d-none');
