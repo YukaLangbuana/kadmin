@@ -73,9 +73,15 @@
                                 <div class="col-6">
                                     <button class="btn btn-primary col-12 text-center" id="consumer-stream-button"
                                         type="button">
-                                        <span class="spinner-border spinner-border-sm d-none" id="spinner-element"
-                                            role="status" aria-hidden="true"></span>
-                                        <span>Stream <i class="bi bi-ear"></i></button></span>
+                                        <div id="streaming-active" class="d-none">
+                                            <span>Streaming</span>
+                                            <span class="spinner-grow spinner-grow-sm text-danger" id="spinner-element"
+                                                role="status" aria-hidden="true"></span>
+                                        </div>
+                                        <div id="streaming-nonactive">
+                                            <span>Stream <i class="bi bi-ear"></i>
+                                        </div>
+                                    </button></span>
                                     </button>
                                     <div class="col-12 text-center">
                                         <span class="form-text">Allows you to keep listening.</span>
@@ -112,7 +118,8 @@
             });
 
             $('#consumer-stream-button').click(function () {
-                $('#consumer-stream-button > #spinner-element').removeClass('d-none');
+                $('#consumer-stream-button > #streaming-nonactive').addClass('d-none');
+                $('#consumer-stream-button > #streaming-active').removeClass('d-none');
             });
         });
     </script>
