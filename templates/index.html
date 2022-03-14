@@ -24,7 +24,7 @@
         <div class="content py-5">
             <div class="row">
                 <div class="col-lg-6 my-3">
-                    <div class="card">
+                    <div class="card" style="min-height: 50vh;">
                         <div class="card-header">
                             Producer
                         </div>
@@ -36,17 +36,20 @@
                             </div>
                             <div class="my-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
                             </div>
                             <div class="my-3">
-                                <button class="btn btn-primary col-12" type="button">Send <i
-                                        class="bi bi-send"></i></button>
+                                <button class="btn btn-primary col-12" id="producer-send-button" type="button">
+                                    <span class="spinner-border spinner-border-sm d-none" id="spinner-element"
+                                        role="status" aria-hidden="true"></span>
+                                    <span>Send <i class="bi bi-send"></i></span>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 my-3">
-                    <div class="card">
+                    <div class="card" style="min-height: 50vh;">
                         <div class="card-header">
                             Consumer
                         </div>
@@ -58,22 +61,39 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-6">
-                                    <button class="btn btn-primary col-12" type="button">Sample <i
-                                            class="bi bi-zoom-in"></i></button>
+                                    <button class="btn btn-primary col-12" id="consumer-sample-button" type="button">
+                                        <span class="spinner-border spinner-border-sm d-none" id="spinner-element"
+                                            role="status" aria-hidden="true"></span>
+                                        <span>Sample <i class="bi bi-zoom-in"></i></button></span>
+                                    </button>
+                                    <div class="col-12 text-center">
+                                        <span class="form-text">Sample one message from topic.</span>
+                                    </div>
                                 </div>
                                 <div class="col-6">
-                                    <button class="btn btn-primary col-12" type="button">Stream <i
-                                            class="bi bi-ear"></i></button>
+                                    <button class="btn btn-primary col-12 text-center" id="consumer-stream-button"
+                                        type="button">
+                                        <span class="spinner-border spinner-border-sm d-none" id="spinner-element"
+                                            role="status" aria-hidden="true"></span>
+                                        <span>Stream <i class="bi bi-ear"></i></button></span>
+                                    </button>
+                                    <div class="col-12 text-center">
+                                        <span class="form-text">Allows you to keep listening.</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="my-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="footer text-center">
+            <i class="bi bi-github"></i>
+            <a href="https://github.com/yukalangbuana/kadmin">https://github.com/yukalangbuana/kadmin</a>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -81,6 +101,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('#producer-send-button').click(function () {
+                $('#producer-send-button > #spinner-element').removeClass('d-none');
+            });
+
+            $('#consumer-sample-button').click(function () {
+                $('#consumer-sample-button > #spinner-element').removeClass('d-none');
+            });
+
+            $('#consumer-stream-button').click(function () {
+                $('#consumer-stream-button > #spinner-element').removeClass('d-none');
+            });
+        });
+    </script>
 </body>
 
 </html>
