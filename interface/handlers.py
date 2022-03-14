@@ -24,4 +24,5 @@ def sample_topic(request, topic_name):
     res = consumer.poll(timeout_ms=1000)
     for _, v in res.items():
         print(v[-1].value.decode('utf-8'))
-    return Response(data={"message": v[-1].value.decode('utf-8')}, status=status.HTTP_200_OK)
+        return Response(data={"message": v[-1].value.decode('utf-8')}, status=status.HTTP_200_OK)
+    return Response(data={"message": "No message"}, status=status.HTTP_200_OK)

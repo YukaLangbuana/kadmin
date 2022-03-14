@@ -30,13 +30,13 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Topic Name</label>
-                                <input class="form-control" id="exampleFormControlInput1"
+                                <label for="producer-topicname" class="form-label">Topic Name</label>
+                                <input class="form-control" id="producer-topicname"
                                     placeholder="Choose a topic name">
                             </div>
                             <div class="my-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+                                <label for="producer-message" class="form-label">Message</label>
+                                <textarea class="form-control" id="producer-message" rows="8"></textarea>
                             </div>
                             <div class="my-3">
                                 <button class="btn btn-primary col-12" id="producer-send-button" type="button">
@@ -55,8 +55,8 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Topic Name</label>
-                                <input class="form-control" id="exampleFormControlInput1"
+                                <label for="consumer-topicname" class="form-label">Topic Name</label>
+                                <input class="form-control" id="consumer-topicname"
                                     placeholder="Choose a topic name">
                             </div>
                             <div class="row my-3">
@@ -71,7 +71,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <button class="btn btn-primary col-12 text-center" id="consumer-stream-button"
+                                    <button class="btn btn-primary col-12 text-center" id="consumer-stream-button" disabled
                                         type="button">
                                         <div id="streaming-active" class="d-none">
                                             <span>Streaming</span>
@@ -84,13 +84,13 @@
                                     </button></span>
                                     </button>
                                     <div class="col-12 text-center">
-                                        <span class="form-text">Allows you to keep listening.</span>
+                                        <span class="form-text">(Coming soon!) Allows you to keep listening.</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="my-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+                                <label for="consumer-message" class="form-label">Message</label>
+                                <textarea class="form-control" id="consumer-message" rows="7"></textarea>
                             </div>
                         </div>
                     </div>
@@ -111,10 +111,38 @@
         $(document).ready(function () {
             $('#producer-send-button').click(function () {
                 $('#producer-send-button > #spinner-element').removeClass('d-none');
+                $.ajax({
+                    url: "api/send",
+                    type: 'POST',
+                    data: {
+                        topic_name: $('#producer-topicname').val(),
+                        message: $('#producer-message').val()
+                    },
+                    success: function (data) {
+                        $('#producer-send-button > #spinner-element').addClass('d-none');
+                        $('#producer-message').val('');
+                    },
+                    error: function (data) {
+                        $('#producer-send-button > #spinner-element').addClass('d-none');
+                        alert('Something went wrong!');
+                    }
+                });
             });
 
             $('#consumer-sample-button').click(function () {
                 $('#consumer-sample-button > #spinner-element').removeClass('d-none');
+                $.ajax({
+                    url: "api/"+$('#consumer-topicname').val()+"/sample",
+                    type: 'GET',
+                    success: function (data) {
+                        $('#consumer-sample-button > #spinner-element').addClass('d-none');
+                        $('#consumer-message').val(data.message);
+                    },
+                    error: function (data) {
+                        $('#consumer-sample-button > #spinner-element').addClass('d-none');
+                        alert('Something went wrong!');
+                    }
+                });
             });
 
             $('#consumer-stream-button').click(function () {
